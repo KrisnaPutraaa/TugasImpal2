@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+// Konstanta yang didefinisikan dalam PSPEC
+#define JAM_KERJA_NORMAL 40
+#define FAKTOR_LEMBUR 1.5
+
+/*
+ * Fungsi ini adalah implementasi langsung dari PSPEC-01.
+ * Input: jam_kerja, tarif_per_jam
+ * Output: total_gaji
+ */
+double hitungGaji(int jam_kerja, double tarif_per_jam) {
+    double total_gaji = 0;
+
+    // Logika utama sesuai PSPEC (Langkah 4-6)
+    if (jam_kerja > JAM_KERJA_NORMAL) {
+        // Jika ada lembur (overtime)
+        double gaji_normal = JAM_KERJA_NORMAL * tarif_per_jam;
+        int jam_lembur = jam_kerja - JAM_KERJA_NORMAL;
+        double tarif_lembur = tarif_per_jam * FAKTOR_LEMBUR;
+        double gaji_lembur = jam_lembur * tarif_lembur;
+        
+        total_gaji = gaji_normal + gaji_lembur;
+    } else {
+        // Jika tidak ada lembur
+        total_gaji = jam_kerja * tarif_per_jam;
+    }
+
+    return total_gaji;
+}
+
+int main() {
+    // Variabel untuk menampung input dari pengguna
+    int jam_kerja_input;
+    double tarif_per_jam_input;
+
+    // Meminta input dari pengguna (Langkah 3 PSPEC)
+    printf("--- Kalkulator Gaji Mingguan Karyawan ---\n");
+    printf("Masukkan total jam kerja seminggu: ");
+    scanf("%d", &jam_kerja_input);
+    printf("Masukkan tarif per jam ($): ");
+    scanf("%lf", &tarif_per_jam_input);
+
+    // Memanggil fungsi yang mengimplementasikan PSPEC
+    double gaji_final = hitungGaji(jam_kerja_input, tarif_per_jam_input);
+
+    // Menampilkan output ke pengguna (Langkah 7 PSPEC)
+    printf("\n---------------------------------------\n");
+    printf("Total Gaji Mingguan Anda: $%.2f\n", gaji_final);
+    printf("---------------------------------------\n");
+
+    return 0;
+}
